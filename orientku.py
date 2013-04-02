@@ -1,34 +1,15 @@
 #!/usr/bin/python
 import sys
 import os
-import pycurl
+import urllib
 from haikufinder import HaikuFinder
 from xml.dom import minidom
 
 #pull random articles from "volume CXLII" of the Orient
-
-class xmlresponse:
-   def __init__(self):
-       self.contents = ''
-
-   def body_callback(self, buf):
-       self.contents = self.contents + buf
-
-if not os.path.exists("issuelist.xml"):
-   x = xmlresponse()
-   c = pycurl.Curl()
-   c.setopt(c.URL, "http://bowdoinorient.com/api/xml_issuelist/CXLII")
-   c.setopt(c.WRITEFUNCTION, x.body_callback)
-   c.perform()
-   c.close()
-   os.system("touch issuelist.xml")
-   xmlcat = "echo \"%s\" >> issuelist.xml" %(x.contents)
-   os.system(xmlcat)
-
-issues = minidom.parse("issuelist.xml")
-print issues
-#dates = xmlissuelist.getElementsById('0')
-#print dates
+content = urllib.urlopen("http://bowdoinorient.com/api/xml_issuelist/CXLII")
+issues = minidom.parse(content)
+dates = issues.getElementById('0')
+print dates
 
 text = "the nation's oldest continuously published college newspaper"
 usedlines = open("used.txt", "r").read()
