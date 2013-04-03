@@ -1,10 +1,10 @@
 Orientku
 =========
-Inspired by the New York Times' April Fools Day joke-cum-tech-art-project, I've done the same for the venerable publication closest to my heart, the [@bowdoinorient].
+Inspired by [Times Haiku], The New York Times' April Fools Day joke-cum-tech-art-project, I've done the same for the venerable publication closest to my heart, the [@bowdoinorient].
 
 System
 ----------
-Specifics are still hazy. A master script (Python maybe, I haven't decided yet) uses the Orient API to pull article content from bowdoinorient.com as it's published. It's parsed in Python using [haikufinder], then sent to Twitter via Ruby and [t]. Find the beautiful, poetic results at [@orientku].
+Python requests JSON from the Orient's PHP API (which I converted from XML to JSON while I was writing this, because it needed doing anyway). The JSON is parsed parsed in Python using [haikufinder], then sent to Twitter via [t], a Ruby gem. Find the beautiful, poetic results at [@orientku].
 
 
 
