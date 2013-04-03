@@ -7,7 +7,7 @@ import random
 from haikufinder import HaikuFinder
 
 #pull a random article from "volume CXLII" of the Orient
-content = urllib.urlopen("http://bowdoinorient.dev/api/json_issuelist/CXLII").read()
+content = urllib.urlopen("http://bowdoinorient.com/api/json_issuelist/CXLII").read()
 dates = json.loads(content)
 maxissue = 0
 for date in dates:
@@ -15,7 +15,7 @@ for date in dates:
 		maxissue = int(date['issue_number'])
 randissue = random.randrange(0, maxissue, 1)
 randdate = dates[randissue]['issue_date']
-nexturl = "http://bowdoinorient.dev/api/json_fulltext/"+randdate+"/"+str(random.randrange(1,5,1))
+nexturl = "http://bowdoinorient.com/api/json_fulltext/"+randdate+"/"+str(random.randrange(1,5,1))
 content = urllib.urlopen(nexturl).read()
 sectiontext = json.loads(content)
 randarticle = random.randrange(0, len(sectiontext), 1)
