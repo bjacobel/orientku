@@ -9,20 +9,28 @@ from haikufinder import HaikuFinder
 tweeted = 0
 
 while not tweeted:
-	#pikc a volume
-        content = urllib.urlopen("http://bowdoinorient.com/api/json_volumelist").read()
-        volumes = json.loads(content)
-	volume = volumes[random.randrange(0,len(volumes))]["roman"]
+	#pick a volume
+	try:
+		content = urllib.urlopen("http://bowdoinorient.com/api/json_volumelist").read()
+		volumes = json.loads(content)
+		volume = volumes[random.randrange(0,len(volumes))]["roman"]
+	except ValueError:
+		break
 
         #pull a random article from that volume of the Orient
-	content = urllib.urlopen("http://bowdoinorient.com/api/json_issuelist/"+str(volume)).read()
-	dates = json.loads(content)
-	maxissue = 0
-	for date in dates:
-		if (int(date['issue_number']) > maxissue):
-			maxissue = int(date['issue_number'])
-	randissue = random.randrange(0, maxissue)
-	randdate = dates[randissue]['issue_date']
+	try:
+		content = urllib.urlopen("http://bowdoinorient.com/api/json_issuelist/"+str(volume)).read()
+		dates = json.loads(content)
+		maxissue = 0
+		for date in dates:
+			if (int(date['issue_number']) > maxissue):
+				maxissue = int(date['issue_number'])
+		randissue = random.randrange(0, maxissue)
+		randdate = dates[randissue]['issue_date']
+	except IndexError:
+		break
+
+
 	nexturl = "http://bowdoinorient.com/api/json_fulltext/"+randdate+"/"+str(random.randrange(1,5,1))
 	content = urllib.urlopen(nexturl).read()
 	sectiontext = json.loads(content)
@@ -31,8 +39,6 @@ while not tweeted:
 
 	url = "http://bowdoinorient.com/article/" + sectiontext[randarticle]["id"]
 	print "Searching %s for haikus..." %url
-
-        #text = " the nation's oldest continuously published college newspaper"
 
         #text file keeps track of lines we've used
 	usedlines = open("used.txt", "r").read()
