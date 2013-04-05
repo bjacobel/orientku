@@ -9,20 +9,24 @@ from haikufinder import HaikuFinder
 tweeted = 0
 
 while not tweeted:
-        #pull a random article from "volume CXLII" of the Orient
-	content = urllib.urlopen("http://bowdoinorient.com/api/json_issuelist/CXLII").read()
+	#pikc a volume
+        content = urllib.urlopen("http://bowdoinorient.com/api/json_volumelist").read()
+        volumes = json.loads(content)
+	volume = volumes[random.randrange(0,len(volumes))]["roman"]
+
+        #pull a random article from that volume of the Orient
+	content = urllib.urlopen("http://bowdoinorient.com/api/json_issuelist/"+str(volume)).read()
 	dates = json.loads(content)
 	maxissue = 0
 	for date in dates:
 		if (int(date['issue_number']) > maxissue):
 			maxissue = int(date['issue_number'])
-
-	randissue = random.randrange(0, maxissue, 1)
+	randissue = random.randrange(0, maxissue)
 	randdate = dates[randissue]['issue_date']
 	nexturl = "http://bowdoinorient.com/api/json_fulltext/"+randdate+"/"+str(random.randrange(1,5,1))
 	content = urllib.urlopen(nexturl).read()
 	sectiontext = json.loads(content)
-	randarticle = random.randrange(0, len(sectiontext), 1)
+	randarticle = random.randrange(0, len(sectiontext))
 	text = sectiontext[randarticle]["body"].encode('ascii', 'ignore')
 
 	url = "http://bowdoinorient.com/article/" + sectiontext[randarticle]["id"]
@@ -43,7 +47,7 @@ while not tweeted:
 		print "%s haikus found in this article. Trying to tweet one of them..." %len(haikus)
 		while (not tweeted) and (trycount <= len(haikus)):
 			trycount+=1
-			haiku = haikus[random.randrange(0, len(haikus), 1)]
+			haiku = haikus[random.randint(0, len(haikus))]
 			if(haiku[0] not in usedlines and haiku[1] not in usedlines and haiku[2] not in usedlines):
 	                        #tweet tweet motherfuckers
 				new = "t update \"%s \n     %s \n%s\n%s\"" %(haiku[0],haiku[1],haiku[2],url)
