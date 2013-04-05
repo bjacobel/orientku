@@ -35,7 +35,7 @@ while not tweeted:
 		print "Searching %s for haikus..." %url
 
                 #text file keeps track of lines we've used
-		usedlines = open("used.txt", "r").read()
+		usedlines = open("/home/bjacobel/projects/orientku/used.txt", "r").read()
 
                 #find the haikus
 		haikus = HaikuFinder(text).find_haikus()
