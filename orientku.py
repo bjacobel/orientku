@@ -29,6 +29,7 @@ while not tweeted:
 		sectiontext = json.loads(content)
 		randarticle = random.randrange(0, len(sectiontext))
 		text = sectiontext[randarticle]["body"].encode('ascii', 'ignore')
+#		text = "the nation's \"oldest\" continuously published college newspaper"
 
 		url = "http://bowdoinorient.com/article/" + sectiontext[randarticle]["id"]
 		print "Searching %s for haikus..." %url
@@ -46,8 +47,12 @@ while not tweeted:
 			print "%s haikus found in this article. Trying to tweet one of them..." %len(haikus)
 			while (not tweeted) and (trycount <= len(haikus)):
 				trycount+=1
-				haiku = haikus[random.randint(0, len(haikus))]
-				if(haiku[0] not in usedlines and haiku[1] not in usedlines and haiku[2] not in usedlines):
+				haiku = haikus[random.randrange(0, len(haikus), 1)]
+				#parse double quotes
+				haiku[0] = haiku[0].replace('"', '\\"')
+				haiku[1] = haiku[1].replace('"', '\\"')
+				haiku[2] = haiku[2].replace('"', '\\"')
+       				if(haiku[0] not in usedlines and haiku[1] not in usedlines and haiku[2] not in usedlines):
 	                                #tweet tweet motherfuckers
 					new = "t update \"%s \n     %s \n%s\n%s\"" %(haiku[0],haiku[1],haiku[2],url)
 					os.system(new)
