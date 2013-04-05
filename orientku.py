@@ -62,3 +62,9 @@ while not tweeted:
 		else:
 			print "No haikus found :("
 
+	except IndexError:
+                print "caught an exception"
+                break
+        except ValueError:
+                print "caught an exception"
+                break
