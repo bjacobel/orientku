@@ -58,7 +58,7 @@ while not tweeted:
 					os.system(new)
 
  	                                #blacklist all the lines you just tweeted
-					used = "echo \"%s\">>used.txt && echo \"%s\">>used.txt && echo \"%s\">>used.txt" %(haiku[0],haiku[1],haiku[2])
+					used = "echo \"%s\" >> ~/projects/orientku/used.txt && echo \"%s\" >> ~/projects/orientku/used.txt && echo \"%s\" >> ~/projects/orientku/used.txt" %(haiku[0],haiku[1],haiku[2])
 					os.system(used)
 					tweeted = 1
 					print "Tweeted!"
