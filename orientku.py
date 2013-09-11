@@ -30,6 +30,7 @@ while not tweeted:
 		randarticle = random.randrange(0, len(sectiontext))
 		text = sectiontext[randarticle]["body"].encode('ascii', 'ignore')
 #		text = "the nation's \"oldest\" continuously published college newspaper"
+#		text = open("sometextfile.txt").read()
 
 		url = "http://bowdoinorient.com/article/" + sectiontext[randarticle]["id"]
 		print "Searching %s for haikus..." %url
@@ -54,7 +55,7 @@ while not tweeted:
 				haiku[2] = haiku[2].replace('"', '\\"')
        				if(haiku[0] not in usedlines and haiku[1] not in usedlines and haiku[2] not in usedlines):
 	                                #tweet tweet motherfuckers
-					new = "t update \"%s \n     %s \n%s\n%s\"" %(haiku[0],haiku[1],haiku[2],url)
+					new = "twitter set \"%s \n     %s \n%s\n%s\"" %(haiku[0],haiku[1],haiku[2],url)
 					os.system(new)
 
  	                                #blacklist all the lines you just tweeted
