@@ -17,10 +17,10 @@ Credits
 * [@tophtucker] - API foundation
 * [@bowdoinorient] - writing heartfelt poetry
 * [haikufinder] - setting it free
-* [t] - the cli twitter client
+* [twitter] - python twitter library
 
 
-  [t]: http://sferik.github.com/t/
+  [t]: http://github.com/sixohsix/twitter
   [haikufinder]: https://github.com/jdf/haikufinder
   [@tophtucker]: http://twitter.com/tophtucker
   [@bjacobel]: http://twitter.com/bjacobel
@@ -30,4 +30,4 @@ Credits
 
 License
 -------------------
-IDGAF. Feel free to use in any way you'd like so long as you don't violate the licenses of [t] or [haikufinder].
+IDGAF. Feel free to use in any way you'd like so long as you don't violate the licenses of [twitter] or [haikufinder].
