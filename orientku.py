@@ -1,7 +1,5 @@
-import sys
 import os
-import urllib
-import json
+import requests
 import random
 from haikufinder import HaikuFinder
 
@@ -13,16 +11,14 @@ USED_LOG = "./used.txt"
 
 tweeted = False
 
-content = urllib.urlopen("http://bowdoinorient.com/api/json_volumelist").read()
-volumes = json.loads(content)[1:]  # volume CXXXII doesn't actually have issues in it in the API
+volumes = requests.get("http://bowdoinorient.com/api/json_volumelist").json()[1:] # volume CXXXII doesn't actually have issues in it in the API
 
 while not tweeted:
     # pick a volume
     volume = volumes[random.randrange(0,len(volumes))]["roman"]
 
     #pull a random article from that volume
-    content = urllib.urlopen("http://bowdoinorient.com/api/json_issuelist/"+str(volume)).read()
-    dates = json.loads(content)
+    dates = requests.get("http://bowdoinorient.com/api/json_issuelist/"+str(volume)).json()
 
     maxissue = int(dates.pop()["issue_number"])
 
@@ -35,10 +31,11 @@ while not tweeted:
         continue
    
     nexturl = "http://bowdoinorient.com/api/json_fulltext/"+randdate+"/"+str(random.randrange(1,5,1))
-    print "Calling the API..."
 
-    content = urllib.urlopen(nexturl).read()
-    sectiontext = json.loads(content)
+    try:
+        sectiontext = requests.get(nexturl, timeout=5).json()
+    except requests.exceptions.Timeout:
+        print "The API took too long to respond. Aborting this request."
     randarticle = random.randrange(0, len(sectiontext))
     text = sectiontext[randarticle]["body"].encode('ascii', 'ignore')
 
