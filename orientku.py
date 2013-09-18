@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import sys
 import os
 import urllib
@@ -6,14 +5,6 @@ import json
 import random
 from haikufinder import HaikuFinder
 
-from IPython.Shell import IPShellEmbed
-
-ipshell = IPShellEmbed()
-
-def excepthook(type, value, traceback):
-    ipshell()
-
-sys.excepthook = excepthook
 
 ## LET IT BE KNOWN that this was the second Python program I ever wrote.
 ## Don't judge me, bro.
