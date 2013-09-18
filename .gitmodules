@@ -1,0 +1,3 @@
+[submodule "haikufinder"]
+	path = haikufinder
+	url = git@github.com:bjacobel/haikufinder.git
