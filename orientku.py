@@ -7,7 +7,7 @@ from haikufinder import HaikuFinder
 ## LET IT BE KNOWN that this was the second Python program I ever wrote.
 ## Don't judge me, bro.
 
-USED_LOG = "./used.txt"
+USED_LOG = "~/code/orientku/used.txt"
 
 tweeted = False
 
