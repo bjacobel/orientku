@@ -7,7 +7,7 @@ from haikufinder import HaikuFinder
 ## LET IT BE KNOWN that this was the second Python program I ever wrote.
 ## Don't judge me, bro.
 
-USED_LOG = "~/code/orientku/used.txt"
+USED_LOG = "/home/bjacobel/code/orientku/used.txt"
 
 tweeted = False
 
@@ -64,7 +64,7 @@ while not tweeted:
             
             if(haiku[0] not in usedlines and haiku[1] not in usedlines and haiku[2] not in usedlines):
                 # tweet tweet motherfuckers
-                new = 'twitter set "{} \n     {} \n{}\n{}"'.format(haiku[0], haiku[1], haiku[2], url)
+                new = '/usr/local/bin/twitter set "{} \n     {} \n{}\n{}"'.format(haiku[0], haiku[1], haiku[2], url)
                 os.system(new)
 
                 # blacklist all the lines you just tweeted
